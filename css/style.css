@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper {
+    min-height: 100%;
+    min-width: 1366px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    flex-grow: 1;
+}
+
+.container {
+    width: 1366px;
+    margin: 0 auto;
+}
+
+.padding-site {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header {
+    background-color: #fce6eb;
+    margin-bottom: 40px;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.nav {
+    display: flex;
+    max-width: 700px;
+}
+
+.nav-link {
+    flex: 1;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.nav-link:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: #d04d4d;
+    transition: 200ms;
+}
+
+.nav-link:hover {
+    color: #d04d4d;
+}
+
+.nav-link:hover:after,
+.nav-link:focus:after {
+    width: 100%;
+}
+
+.logo-img {
+    width: 80px;
+    height: 80px;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100px;
+    padding: 0 10px;
+    background-color: #e1e0e1;
+}
+
+.copyright {
+    display: flex;
+    padding: 10px;
+    color: #444;
+}
+
+.cart-btn {
+    width: 100px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.buy-btn {
+    width: 100px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.buy-btn:hover {
+    background: #fce6eb;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;   
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 218px;
+    height: 225px;
+    border: 1px solid pink;
+    border-radius: 5px 5px;
+}
+
