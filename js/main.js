@@ -1,25 +1,29 @@
+const API = `https://raw.githubusercontent.com/katerinkaivanova/online-store-api/master/responses`;
+
 class Products {
     constructor(container = '.products') {
         this.container = container;
         this.data = [];
         this.allProducts = [];
-        this.totalAmount = 0
-        this.init()
+        this._fetchGoods()
+            .then(() => this._render())
     }
 
-    init() {
-        this._fetchGoods();
-        this._render();
+    _fetchGoods(){
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .then(data => {
+                this.data = [...data];
+            })
+            .catch(error => console.log(error));
     }
 
-    _fetchGoods() {
-        this.data = [
-            {id: 1, title: 'Notebook', price: 2000},
-            {id: 2, title: 'Keyboard', price: 70},
-            {id: 3, title: 'Mouse', price: 46},
-            {id: 4, title: 'Gamepad', price: 54},
-            {id: 5, title: 'Chair', price: 30},
-        ];
+    calcSum() {
+        let result = 0;
+        for (let product of this.allProducts) {
+            result += product.price;
+        }
+        return result
     }
 
     _render() {
@@ -30,31 +34,24 @@ class Products {
             block.insertAdjacentHTML('beforeend', product.render());
         }
     }
-
-    getTotal() {
-        for (let product of this.allProducts) {
-            this.totalAmount += product.price;
-        }
-        return this.totalAmount
-    }
 }
 
 
 class ProductItem {
     constructor(product, img = "https://placehold.it/200x150") {
         this.price = product.price;
-        this.title = product.title;
-        this.id = product.id;
+        this.product_name = product.product_name;
+        this.id_product = product.id_product;
         this.img = img
     }
 
     render() {
         return `<div class="product-item">
-                 <img src="${this.img}" alt="${this.title}">
+                 <img src="${this.img}" alt="${this.product_name}">
                  <div class="desc">
-                     <h3 class="product-item-title">${this.title}</h3>
-                     <p class="product-item-price">${this.price}</p>
-                     <button class="buy-btn">Купить</button>
+                     <h3 class="product-item-title">${this.product_name}</h3>
+                     <p class="product-item-price">${this.price}&#36;</p>
+                     <button class="buy-btn">Buy</button>
                  </div>
              </div>`
     }
@@ -62,20 +59,35 @@ class ProductItem {
 
 
 class Cart {
-    constructor() {
-        this.allProducts = [];
-        this.init()
+    constructor(container = '.dropdown-block') {
+        this.container = container;
+        this.data = [];
+        this.cartProducts = [];
+        this._fetchGoods()
+            .then(() => this._render())
     }
 
-    init() {
-        this.allProducts = this.getProducts();
+    _fetchGoods() {
+        return fetch(`${API}/getBasket.json`)
+            .then(result => result.json())
+            .then(data => {
+                this.data = [...data.contents];
+            })
+            .catch(error => console.log(error));
     }
 
-    getProducts() {} // cодержимое корзины
+    _render() {
+        const block = document.querySelector(this.container);
+        for (let el of this.data) {
+            const product = new CartItem(el);
+            this.cartProducts.push(product);
+            block.insertAdjacentHTML('beforeend', product.render());
+        }
+    }
 
     getSize() {} // количество элементов корзины
 
-    getTotal() {} // общая сумма корзины
+    getSum() {} // общая сумма корзины
 
     addProduct() {} // добавить продукт по id
 
@@ -85,18 +97,20 @@ class Cart {
 
 class CartItem {
     constructor(product) {
-        this.id = product.id;
+        this.id_product = product.id_product;
+        this.product_name = product.product_name;
+        this.price = product.price;
+        this.quantity = product.quantity
     }
 
-    getPrice(id) {} // цена товара
-
-    getQuantity(id) {} // количество товара
-
-    getValue(id) {} // общая сумма товара
+    render() {
+        return `<div class="cart-item">
+                     <p>${this.product_name}</p>
+                     <p>${this.price}&#36;</p>
+                     <p>${this.quantity}</p>
+                 </div>`
+    }
 }
-
 const products = new Products();
-const totalRes = products.getTotal();
-console.log(totalRes);
-
 const cart = new Cart();
+
