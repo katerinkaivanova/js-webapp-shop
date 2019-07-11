@@ -9,7 +9,7 @@ class Products {
             .then(() => this._render())
     }
 
-    _fetchGoods(){
+    _fetchGoods() {
         return fetch(`${API}/catalogData.json`)
             .then(result => result.json())
             .then(data => {
@@ -85,13 +85,17 @@ class Cart {
         }
     }
 
-    getSize() {} // количество элементов корзины
+    getSize() {
+    } // количество элементов корзины
 
-    getSum() {} // общая сумма корзины
+    getSum() {
+    } // общая сумма корзины
 
-    addProduct() {} // добавить продукт по id
+    addProduct() {
+    } // добавить продукт по id
 
-    removeProduct() {} // удалить продукт по id
+    removeProduct() {
+    } // удалить продукт по id
 }
 
 
@@ -111,6 +115,7 @@ class CartItem {
                  </div>`
     }
 }
+
 const products = new Products();
 const cart = new Cart();
 
