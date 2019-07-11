@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop / Contacts</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="top">
+        <div class="container">
+            <header class="header padding-site">
+                <div class="logo">
+                    <a class="logo-content" href="index.html">
+                        <img src="img/logo.png" class="logo-img" alt="Логотип" title="Логотип">
+                    </a>
+                </div>
+                <nav class="nav">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="#">Books</a>
+                    <a class="nav-link" href="contacts.html">Contacts</a>
+                </nav>
+                <div class="dropdown">
+                    <button class="btn cart-btn" type="button">Cart</button>
+                    <div class="dropdown-block">
+                        <!--beforeend-->
+                    </div>
+                </div>
+            </header>
+        </div>
+        <main>
+            <div class="container">
+                <div class="feedback padding-site">
+                    <form action="#" method="post" id="feedback-form">
+                        <div class="field-block">
+                            <label for="name">Ваше имя:</label>
+                            <input id="name" class="field" name="name" required type="text"
+                                   placeholder="Full name">
+                        </div>
+                        <div class="field-block">
+                            <label for="email">Ваш E-mail:</label>
+                            <input id="email" class="field" name="email" required type="email"
+                                   placeholder="mymail@email.com">
+                        </div>
+                        <div class="field-block">
+                            <label for="phone">Ваш телефон:</label>
+                            <input id="phone" class="field" name="phone" required type="text"
+                                   placeholder="+7(000)000-0000">
+                        </div>
+                        <div class="field-block">
+                            <label for="message">Текст сообщения:</label>
+                            <textarea id="message" class="field" required name="message" rows="4"></textarea>
+                        </div>
+                        <button id="button" class="btn feedback-btn" type="submit">Отправить</button>
+                        <button class="btn feedback-btn">Очистить</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">&#169; All rights reserved</p>
+        </div>
+    </footer>
+</div>
+<script defer src="js/main.js"></script>
+<script defer src="js/validator.js"></script>
+<script>
+    window.onload = () => {
+        document.getElementById('feedback-form').addEventListener('submit', e => {
+            let valid = new Validator('#feedback-form');
+            if (!valid.valid) {
+                e.preventDefault();
+            }
+        })
+    }
+</script>
+</body>
+</html>
